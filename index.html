@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Unsubscribe</title>
+  </head>
+  <body>
+    <label>Enter email to unsubscribe</label>
+    <input type="email" />
+    <button type="submit">Unsubscribe</button>
+    <script>
+      const handleClick = async (event) => {
+        try {
+          const input = document.querySelector('input');
+          const response = await fetch('http://localhost:3100/unsubscribe', {method: 'POST',
+            body: {
+              email: input.value,
+            },
+          });
+          const data = await response.json();
+          console.log('response data ', data);
+        } catch (error) {
+          console.error('Error unsubscribing ', error);
+        }
+      };
+      const button = document.querySelector('button');
+      button.addEventListener('click', handleClick);
+    </script>
+  </body>
+</html>
